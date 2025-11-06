@@ -1,0 +1,29 @@
+FROM jupyter/pyspark-notebook:latest
+
+USER root
+
+# Установка Java и wget
+RUN apt-get update && apt-get install -y wget openjdk-8-jdk
+
+# Установка Hadoop
+RUN wget https://dlcdn.apache.org/hadoop/common/hadoop-3.4.1/hadoop-3.4.1.tar.gz && \
+    tar -xzvf hadoop-3.4.1.tar.gz -C /opt/ && \
+    mv /opt/hadoop-3.4.1 /opt/hadoop && \
+    rm hadoop-3.4.1.tar.gz
+
+# Переменные окружения для Hadoop
+ENV HADOOP_HOME=/opt/hadoop
+ENV PATH=$PATH:$HADOOP_HOME/bin
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-arm64
+ENV HADOOP_CONF_DIR=/etc/hadoop
+
+RUN pip install --no-cache-dir \
+    pyspark==3.3.2 \
+    pyarrow \
+    pandas \
+    numpy \
+    matplotlib \
+    seaborn \
+    findspark
+
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token=fijma"]

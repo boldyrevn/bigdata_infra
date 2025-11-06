@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+  <!-- Hive Metastore Connection -->
+  <property>
+    <name>hive.metastore.uris</name>
+    <value>thrift://hive-metastore:9083</value>
+    <description>Thrift URI for the remote metastore</description>
+  </property>
+
+  <!-- Warehouse Directory -->
+  <property>
+    <name>hive.metastore.warehouse.dir</name>
+    <value>hdfs://namenode:9000/user/hive/warehouse</value>
+    <description>Location of default database for the warehouse</description>
+  </property>
+
+  <!-- PostgreSQL Metastore Database Configuration -->
+  <property>
+    <name>javax.jdo.option.ConnectionURL</name>
+    <value>jdbc:postgresql://hive-metastore-postgres:5432/metastore</value>
+    <description>JDBC connection string for the metastore database</description>
+  </property>
+
+  <property>
+    <name>javax.jdo.option.ConnectionDriverName</name>
+    <value>org.postgresql.Driver</value>
+    <description>JDBC driver class name</description>
+  </property>
+
+  <property>
+    <name>javax.jdo.option.ConnectionUserName</name>
+    <value>hive</value>
+    <description>Username for the metastore database</description>
+  </property>
+
+  <property>
+    <name>javax.jdo.option.ConnectionPassword</name>
+    <value>hive</value>
+    <description>Password for the metastore database</description>
+  </property>
+
+  <!-- Schema Verification -->
+  <property>
+    <name>hive.metastore.schema.verification</name>
+    <value>false</value>
+    <description>Enforce metastore schema version consistency</description>
+  </property>
+
+  <!-- Auto Create Schema -->
+  <property>
+    <name>datanucleus.autoCreateSchema</name>
+    <value>true</value>
+  </property>
+
+  <property>
+    <name>datanucleus.fixedDatastore</name>
+    <value>false</value>
+  </property>
+
+  <!-- HDFS Configuration -->
+  <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://namenode:9000</value>
+  </property>
+
+  <!-- Enable Stats -->
+  <property>
+    <name>hive.stats.autogather</name>
+    <value>true</value>
+  </property>
+
+  <!-- Execution Engine -->
+  <property>
+    <name>hive.execution.engine</name>
+    <value>mr</value>
+  </property>
+</configuration>
