@@ -3,7 +3,7 @@ from xml.etree.ElementTree import Element, SubElement, tostring
 from xml.dom.minidom import parseString
 
 # Путь к исходному config файлу
-CONFIG_FILE = "config"
+CONFIG_FILE = "config.env"
 
 # Папка для вывода XML
 OUTPUT_DIR = "./hadoop-config"
