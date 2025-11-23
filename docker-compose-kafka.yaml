@@ -174,7 +174,7 @@ services:
   spark-worker-2:
     image: apache/spark:3.5.3
     container_name: spark-worker-2
-    command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.worker.Worker", "spark://spark-master:7077", "--webui-port", "8081"]
+    command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.worker.Worker", "spark://spark-master:7077", "--webui-port", "8082"]
     environment:
       - SPARK_MODE=worker
       - SPARK_WORKER_CORES=2
@@ -244,6 +244,8 @@ services:
   kafka:
     image: confluentinc/cp-kafka:latest
     container_name: kafka
+    networks:
+      - spark_mts
     ports:
       - "9092:9092"
       - "29092:29092"
@@ -268,8 +270,10 @@ services:
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
     container_name: kafka-ui
+    networks:
+      - spark_mts
     ports:
-      - "8080:8083"
+      - "8083:8080"
     depends_on:
       - kafka
     environment:
